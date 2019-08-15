@@ -5,9 +5,11 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-count: 0
+      count: 1,
+      number: 2
     }
     this.handleClick = this.handleClick.bind(this);
+    this.clickDouble = this.clickDouble.bind(this);
   }
 
   //prevState is the old version of state, and an object
@@ -30,16 +32,32 @@ count: 0
 Method A: pass an object, good if the previous state does NOT matter
 
   */
+  
+  clickDouble() {
+    this.setState(prevState => {
+      return {
+        number: prevState + 1
+      }
+    })
+  }
+
 
   render() {
     return (
       <div>
         <h1>{this.state.count}</h1>
         <button onClick={this.handleClick}>Change!</button>
+        <h1>{this.state.number}</h1>
+        <button onClick={this.clickDouble}>Double</button>
     </div>
   )
-}
-
+  }
+  /*
+can pass state to other components also
+< ChildComponent count = {this.state.count} />
+this means ChildComp is receiving a prop called Count- the value of Count is the current state of its parent component (in this case App)
+whenever React sees that a state has changed it will rerender to the children as well
+*/
 
 }
 
